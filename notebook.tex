@@ -1,0 +1,740 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{00 Course Outline SS2020}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Course Outline}\label{course-outline}
+
+Welcome to the new semester, this time fully online. We start with an
+introduction of what fluids (gases and liquids) are and set the
+foundation for the first part of the course on \emph{microfluidics}.
+
+\subsection{Week 1: General Introduction
+(7.4.2020)}\label{week-1-general-introduction-7.4.2020}
+
+We will cover the adminstration and give a introduction into fluid
+mechanics and microfluidics in particular.
+
+Gases and liquids can be modeled with particles (non interacting and
+interacting). Molecular dynamics (MD) simulations help to understand
+their behaviour and watch them in slow motion. To get into the mood of
+using averaged equations I want you to play with a MD program. It can be
+\href{http://cav2012.sg/cdohl/ph3501/md/}{run in your browser}. For more
+information on how to run the program is available
+\href{http://physics.weber.edu/schroeder/md/}{web site from Prof
+Schroeder}, please note that this version does not have the pressure
+graph.
+
+To get us all started, we rehearse some math. Please look and work
+through the
+\href{01\%20Math\%20Refresher\%20and\%20Python\%20Introduction.ipynb}{Math
+refresher notebook}. This notebook also offers you with some first
+introduction into Python, the language we use in the course. A nice
+\href{http://nbviewer.jupyter.org/github/jrjohansson/scientific-python-lectures/blob/master/Lecture-1-Introduction-to-Python-Programming.ipynb}{introduction
+is given by Robert Johansson}. Don't worry, we will slowly start with
+it. I'll motivate the use of a programming language in the course, and
+besides learning fluid mechanics you obtain some skills which increases
+your employability!
+
+We have a short recap on the *
+\href{01\%20Math\%20Refresher\%20and\%20Python\%20Introduction.ipynb}{math}
+and the representation in Python then we'll look into the *
+\href{02\%20Streamlines,\%20Pathlines,\%20Streaklines.ipynb}{streamlines,
+streaklines, and pathlines} and use a
+\href{Example\%20of\%20Stream-Streak-Pathlines.ipynb}{interactive
+example} before we look at the
+
+\subsection{Week 2: Intro to Microfluidics \& Derivation of the
+Conservation of
+Mass}\label{week-2-intro-to-microfluidics-derivation-of-the-conservation-of-mass}
+
+Short introduction to microfluidics plus 3 videos are available on
+youtube here: \href{https://www.youtube.com/watch?v=b8zE2i755-k}{Video
+1}, \href{https://www.youtube.com/watch?v=68p3qAm4i7U}{Video 2}, and
+\href{https://www.youtube.com/watch?v=EYuyRUjnTgc}{Video 3}.
+
+Soft mathematical introduction to fluid mechanics. We start with the
+\href{Material\%20Derivative,\%20Gaussian\%20Divergence\%20Theorem\%20and\%20Conservation\%20of\%20Mass.ipynb}{material
+derivative} and also introduce the \emph{Gaussian Divergence Theorem}
+and the \emph{Conservation of Mass}. It is important that you understand
+the
+\href{https://en.wikipedia.org/wiki/Lagrangian_and_Eulerian_specification_of_the_flow_field}{Eulerian
+description} of flows.
+
+\subsubsection{Tutorial 1 (Week 2):}\label{tutorial-1-week-2}
+
+See Tutorial Sheet on E-Learning
+
+\subsection{Week 3: Navier Stokes equation derivation and first
+analytical
+solutions}\label{week-3-navier-stokes-equation-derivation-and-first-analytical-solutions}
+
+\href{Cauchy's\%20Equation\%20of\%20Motion\%20\&\%20Navier\%20Stokes\%20Equation.ipynb}{In
+this Notebook} we first derive the Cauchy's Equation of Motion for a
+continuum from Newton's 2nd Law of Motion for a deformable object. Then
+we insert the surface stresses for a linear fluid and through
+simplification obtain the Navier Stokes Equation for a incompressible
+and constant viscosity fluid. Then we look at some solution of a
+\href{13a_Navier\%20Stokes\%20example.ipynb}{numerical flow solver}.
+
+\subsection{Week 4:}\label{week-4}
+
+We discuss analytical solutions to the Navier Stokes Equation in
+\href{Analytical\%20solutions\%20to\%20steady\%20and\%20laminar\%20flows.ipynb}{planar
+and cylindrical symmetry} and
+\href{Dimensional\%20Analysis\%20of\%20the\%20Navier\%20Stokes\%20Equation.ipynb}{Dimensional
+Analysis}.
+
+\subsubsection{Tutorial 2 (Week 4):}\label{tutorial-2-week-4}
+
+\textbf{Question A Flow Simulations}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Write down the boundary conditions for the velocity \(\vec{u}\) and
+  pressure for a flow in a 2d-tube driven by a pressure gradient. You
+  need one for each boundary, i.e. the walls and the inlet/outlet, and
+  component of the velocity. The pressure at the walls are determined by
+  the incompressibility condition. For help look into the code.
+\item
+  Do the same for a flow in a 2-tube driven by the upper wall. Again,
+  check you answer with the boundary conditions stated in the code.
+\item
+  Conduct simulations for pressure driven and wall driven flows. Try to
+  obtain a parabolic profile for the pressure driven flow and a linear
+  profile for the wall driven flow. Discuss the results. What is the
+  effect of the time step of integration, and the CFL-number. Look up
+  the meaning of the CFL number.
+\end{enumerate}
+
+** Question B Index Notation**
+
+Use the index notation and work out the following problems
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \[\frac{\partial}{\partial x_i}(p\,\delta_{ij})=(\nabla p)_j\]
+\item
+  \[\nabla\cdot(\rho \vec{u})=(\nabla \rho)\cdot \vec{u}+\rho\,\nabla\cdot\vec{u}\]
+\end{enumerate}
+
+** Question C Navier Stokes Equation**
+
+The electrostatic force is a body force \(\vec{F}=q\,\vec{E}\), where
+\(q\) is the charge and \(\vec{E}\) is the electric field. Add this
+force in the derivation of the Navier Stokes Equation and write a Navier
+Stokes Eq. with electrostatic body forces using a charge density
+\(\rho_{el}\) and the electric field \(\vec{E}\).
+
+\subsection{Week 5}\label{week-5}
+
+Navier Stokes solution to an
+\href{Analytical\%20Solution\%20to\%20an\%20unsteady\%20flow.ipynb}{unsteady
+problem} (Stoke's first problem) and comparison with the CFD solver. For
+inviscid flows we simplify the Navier Stokes Eq. to the
+\href{Bernoulli\%20Equation.ipynb}{Bernoulli equation}.
+
+\subsection{Week6}\label{week6}
+
+Application of the
+\href{Example\%20of\%20unsteady\%20Bernoulli\%20equation.ipynb}{Unsteady
+Bernoulli Equation} for the collapse of a spherical void. Introduction
+to
+\href{Ideal\%20Flow\%20\&\%20Solutions\%20to\%20the\%20Laplace\%20Equation.ipynb}{potential
+flow}.
+
+\subsection{Tutorial 3 (Week 6)}\label{tutorial-3-week-6}
+
+\subsubsection{Question 1}\label{question-1}
+
+Repeat the Navier Stokes derivation for a tube now for 2 concentric
+tubes with radii \(r_i\) and \(r_o\).\\
+ Show that the flow velocity in \(z\)-direction is \[
+u_z(r)=\frac{1}{4\mu}\frac{\mathrm{d}p}{\mathrm{d}z}\left(r^2-r_o^2+\frac{r_i^2-r_o^2}{\ln \frac{r_o}{r_i}}\ln\left[\frac{r}{r_i}\right]\right)\quad .
+\]
+
+\subsubsection{Question 2}\label{question-2}
+
+We'll read and discuss two microfluidic papers to get a feeling on the
+making and running of a microfluidic system. The two papers are
+available here *
+\href{pdf/manufacture\%20microfluidic\%20venturi.pdf}{Cavitation in flow
+through a micro-orifice inside a silicon microchannel} from Chandan
+Mishra, and Yoav Peles. This paper describes the manufacturing process
+of glass bonded Si chips for high-pressure water flows. *
+\href{pdf/microfluidic\%20venturi.pdf}{An experimental investigation of
+hydrodynamic cavitation in micro-Venturis} from Chandan Mishra, and Yoav
+Peles. This paper describes a venturi and the phase transition of the
+liquid into vapor.
+
+Work in two groups. The first group focuses reading and understanding on
+manufacturing. Try to answer the questions: 1. Explain the use of a
+photoresist. 2. What is the difference of SiO and pure Si surface to RIE
+and DRIE processes? 3. Where is anodic bonding used. 4. How is the
+device mounted in the holder and connected to the tubing?
+
+The second group looks at the experimental paper (cavitation in
+micro-Venturis). 1. The cavitation number and the Reynolds number are
+defined. Check their values for the experimental protocols. Is it a low
+or high-Reynolds number flow? What dominates, inerta or viscosity? 2.
+Why does a low cavitation number result in more vapor generation? 3.
+Summarize the regimes of cavitation observed in the experiment.
+
+\subsection{Week 7}\label{week-7}
+
+Derivation of the force on a sphere \href{Potential\%20Sphere.ipynb}{in
+potential flow} and in a viscous flow, i.e. the
+\href{Stokes\%20Sphere.ipynb}{Stokes Sphere} problem. We will also look
+at a viscous microfluidic flow with a potential flow solution, the
+\href{Hele\%20Shaw\%20Flow.ipynb}{Hele Shaw flow}.
+
+\subsection{Tutorial 4 (Week 8)}\label{tutorial-4-week-8}
+
+\section{Course Outline}\label{course-outline-1}
+
+Welcome to the new semester, this time fully online. We start with an
+introduction of what fluids (gases and liquids) are and set the
+foundation for the first part of the course on \emph{microfluidics}.
+
+\subsection{Week 1: General Introduction
+(7.4.2020)}\label{week-1-general-introduction-7.4.2020-1}
+
+We will cover the adminstration and give a introduction into fluid
+mechanics and microfluidics in particular.
+
+Gases and liquids can be modeled with particles (non interacting and
+interacting). Molecular dynamics (MD) simulations help to understand
+their behaviour and watch them in slow motion. To get into the mood of
+using averaged equations I want you to play with a MD program. It can be
+\href{http://cav2012.sg/cdohl/ph3501/md/}{run in your browser}. For more
+information on how to run the program is available
+\href{http://physics.weber.edu/schroeder/md/}{web site from Prof
+Schroeder}, please note that this version does not have the pressure
+graph.
+
+To get us all started, we rehearse some math. Please look and work
+through the
+\href{01\%20Math\%20Refresher\%20and\%20Python\%20Introduction.ipynb}{Math
+refresher notebook}. This notebook also offers you with some first
+introduction into Python, the language we use in the course. A nice
+\href{http://nbviewer.jupyter.org/github/jrjohansson/scientific-python-lectures/blob/master/Lecture-1-Introduction-to-Python-Programming.ipynb}{introduction
+is given by Robert Johansson}. Don't worry, we will slowly start with
+it. I'll motivate the use of a programming language in the course, and
+besides learning fluid mechanics you obtain some skills which increases
+your employability!
+
+We have a short recap on the *
+\href{01\%20Math\%20Refresher\%20and\%20Python\%20Introduction.ipynb}{math}
+and the representation in Python then we'll look into the *
+\href{02\%20Streamlines,\%20Pathlines,\%20Streaklines.ipynb}{streamlines,
+streaklines, and pathlines} and use a
+\href{Example\%20of\%20Stream-Streak-Pathlines.ipynb}{interactive
+example} before we look at the
+
+\subsection{Week 2: Intro to Microfluidics \& Derivation of the
+Conservation of
+Mass}\label{week-2-intro-to-microfluidics-derivation-of-the-conservation-of-mass-1}
+
+Short introduction to microfluidics plus 3 videos are available on
+youtube here: \href{https://www.youtube.com/watch?v=b8zE2i755-k}{Video
+1}, \href{https://www.youtube.com/watch?v=68p3qAm4i7U}{Video 2}, and
+\href{https://www.youtube.com/watch?v=EYuyRUjnTgc}{Video 3}.
+
+Soft mathematical introduction to fluid mechanics. We start with the
+\href{Material\%20Derivative,\%20Gaussian\%20Divergence\%20Theorem\%20and\%20Conservation\%20of\%20Mass.ipynb}{material
+derivative} and also introduce the \emph{Gaussian Divergence Theorem}
+and the \emph{Conservation of Mass}. It is important that you understand
+the
+\href{https://en.wikipedia.org/wiki/Lagrangian_and_Eulerian_specification_of_the_flow_field}{Eulerian
+description} of flows.
+
+\subsubsection{Tutorial 1 (Week 2):}\label{tutorial-1-week-2-1}
+
+See Tutorial Sheet on E-Learning
+
+\subsection{Week 3: Navier Stokes equation derivation and first
+analytical
+solutions}\label{week-3-navier-stokes-equation-derivation-and-first-analytical-solutions-1}
+
+\href{Cauchy's\%20Equation\%20of\%20Motion\%20\&\%20Navier\%20Stokes\%20Equation.ipynb}{In
+this Notebook} we first derive the Cauchy's Equation of Motion for a
+continuum from Newton's 2nd Law of Motion for a deformable object. Then
+we insert the surface stresses for a linear fluid and through
+simplification obtain the Navier Stokes Equation for a incompressible
+and constant viscosity fluid. Then we look at some solution of a
+\href{13a_Navier\%20Stokes\%20example.ipynb}{numerical flow solver}.
+
+\subsection{Week 4:}\label{week-4-1}
+
+We discuss analytical solutions to the Navier Stokes Equation in
+\href{Analytical\%20solutions\%20to\%20steady\%20and\%20laminar\%20flows.ipynb}{planar
+and cylindrical symmetry} and
+\href{Dimensional\%20Analysis\%20of\%20the\%20Navier\%20Stokes\%20Equation.ipynb}{Dimensional
+Analysis}.
+
+\subsubsection{Tutorial 2 (Week 4):}\label{tutorial-2-week-4-1}
+
+\textbf{Question A Flow Simulations}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Write down the boundary conditions for the velocity \(\vec{u}\) and
+  pressure for a flow in a 2d-tube driven by a pressure gradient. You
+  need one for each boundary, i.e. the walls and the inlet/outlet, and
+  component of the velocity. The pressure at the walls are determined by
+  the incompressibility condition. For help look into the code.
+\item
+  Do the same for a flow in a 2-tube driven by the upper wall. Again,
+  check you answer with the boundary conditions stated in the code.
+\item
+  Conduct simulations for pressure driven and wall driven flows. Try to
+  obtain a parabolic profile for the pressure driven flow and a linear
+  profile for the wall driven flow. Discuss the results. What is the
+  effect of the time step of integration, and the CFL-number. Look up
+  the meaning of the CFL number.
+\end{enumerate}
+
+** Question B Index Notation**
+
+Use the index notation and work out the following problems
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \[\frac{\partial}{\partial x_i}(p\,\delta_{ij})=(\nabla p)_j\]
+\item
+  \[\nabla\cdot(\rho \vec{u})=(\nabla \rho)\cdot \vec{u}+\rho\,\nabla\cdot\vec{u}\]
+\end{enumerate}
+
+** Question C Navier Stokes Equation**
+
+The electrostatic force is a body force \(\vec{F}=q\,\vec{E}\), where
+\(q\) is the charge and \(\vec{E}\) is the electric field. Add this
+force in the derivation of the Navier Stokes Equation and write a Navier
+Stokes Eq. with electrostatic body forces using a charge density
+\(\rho_{el}\) and the electric field \(\vec{E}\).
+
+\subsection{Week 5}\label{week-5-1}
+
+Navier Stokes solution to an
+\href{Analytical\%20Solution\%20to\%20an\%20unsteady\%20flow.ipynb}{unsteady
+problem} (Stoke's first problem) and comparison with the CFD solver. For
+inviscid flows we simplify the Navier Stokes Eq. to the
+\href{Bernoulli\%20Equation.ipynb}{Bernoulli equation}.
+
+\subsection{Week6}\label{week6-1}
+
+Application of the
+\href{Example\%20of\%20unsteady\%20Bernoulli\%20equation.ipynb}{Unsteady
+Bernoulli Equation} for the collapse of a spherical void. Introduction
+to
+\href{Ideal\%20Flow\%20\&\%20Solutions\%20to\%20the\%20Laplace\%20Equation.ipynb}{potential
+flow}.
+
+\subsection{Tutorial 3 (Week 6)}\label{tutorial-3-week-6-1}
+
+\subsubsection{Question 1}\label{question-1-1}
+
+Repeat the Navier Stokes derivation for a tube now for 2 concentric
+tubes with radii \(r_i\) and \(r_o\).\\
+ Show that the flow velocity in \(z\)-direction is \[
+u_z(r)=\frac{1}{4\mu}\frac{\mathrm{d}p}{\mathrm{d}z}\left(r^2-r_o^2+\frac{r_i^2-r_o^2}{\ln \frac{r_o}{r_i}}\ln\left[\frac{r}{r_i}\right]\right)\quad .
+\]
+
+\subsubsection{Question 2}\label{question-2-1}
+
+We'll read and discuss two microfluidic papers to get a feeling on the
+making and running of a microfluidic system. The two papers are
+available here *
+\href{pdf/manufacture\%20microfluidic\%20venturi.pdf}{Cavitation in flow
+through a micro-orifice inside a silicon microchannel} from Chandan
+Mishra, and Yoav Peles. This paper describes the manufacturing process
+of glass bonded Si chips for high-pressure water flows. *
+\href{pdf/microfluidic\%20venturi.pdf}{An experimental investigation of
+hydrodynamic cavitation in micro-Venturis} from Chandan Mishra, and Yoav
+Peles. This paper describes a venturi and the phase transition of the
+liquid into vapor.
+
+Work in two groups. The first group focuses reading and understanding on
+manufacturing. Try to answer the questions: 1. Explain the use of a
+photoresist. 2. What is the difference of SiO and pure Si surface to RIE
+and DRIE processes? 3. Where is anodic bonding used. 4. How is the
+device mounted in the holder and connected to the tubing?
+
+The second group looks at the experimental paper (cavitation in
+micro-Venturis). 1. The cavitation number and the Reynolds number are
+defined. Check their values for the experimental protocols. Is it a low
+or high-Reynolds number flow? What dominates, inerta or viscosity? 2.
+Why does a low cavitation number result in more vapor generation? 3.
+Summarize the regimes of cavitation observed in the experiment.
+
+\subsection{Week 7}\label{week-7-1}
+
+Derivation of the force on a sphere \href{Potential\%20Sphere.ipynb}{in
+potential flow} and in a viscous flow, i.e. the
+\href{Stokes\%20Sphere.ipynb}{Stokes Sphere} problem. We will also look
+at a viscous microfluidic flow with a potential flow solution, the
+\href{Hele\%20Shaw\%20Flow.ipynb}{Hele Shaw flow}.
+
+\subsection{Tutorial 4 (Week 8)}\label{tutorial-4-week-8-1}
+
+\subsubsection{Question 1}\label{question-1-2}
+
+\begin{itemize}
+\item
+  Derive the Navier Stokes Solution to the steady flow of a film of
+  liquid of uniform thickness \(h\) that flows done an incline (dark
+  gray) under an angle \(\alpha\). Use the fact that there is no
+  pressure gradient driving the flow (why?). Also set the \(x\)-axis
+  parallel to the incline and choose a suitable body force.
+\item
+  Let the liquid be water and calculate the speed \(v_x(h)\) of the free
+  surface of the film in the case \(h=100\,\mu\)m und angle
+  \(\alpha=30^\circ\).
+\end{itemize}
+
+\subsubsection{Question 2}\label{question-2-2}
+
+\begin{itemize}
+\tightlist
+\item
+  Look up literature on the Milikan Experiment. Find out how the Stokes
+  Law \(F_D=6\pi\mu R U\) was used to determine the charge of an
+  electron. Sketch the forces acting on a droplet and explain who the
+  experiment was conducted in detail.
+\end{itemize}
+
+\subsubsection{Question 3}\label{question-3}
+
+\begin{itemize}
+\tightlist
+\item
+  Aerosols are fine droplets in the air that may contain viral load. In
+  the current pandemic researcher are trying to understand the transport
+  of these droplets. In a quiestence room with no drift (net flow) of
+  the air, droplets may fall by gravity. Calculate and plot the fall
+  time of an aequous droplet from \(100\,\)nm to \(10\,\mu\) spherical
+  droplet in air for a distance of \(30\,\)cm. Check and compare your
+  findings with a recent
+  \href{https://www.pnas.org/content/early/2020/05/12/2006874117}{paper}.
+  Comment critically this paper.
+\end{itemize}
+
+\subsection{Week 8}\label{week-8}
+
+\subsection{Week 9}\label{week-9}
+
+\subsection{Week 10}\label{week-10}
+
+\subsection{Week 11}\label{week-11}
+
+\subsection{Week 12}\label{week-12}
+
+\subsection{Week 13}\label{week-13}
+
+\subsection{Week 14}\label{week-14}
+
+\subsection{Week 8}\label{week-8-1}
+
+\subsection{Week 9}\label{week-9-1}
+
+\subsection{Week 10}\label{week-10-1}
+
+\subsection{Week 11}\label{week-11-1}
+
+\subsection{Week 12}\label{week-12-1}
+
+\subsection{Week 13}\label{week-13-1}
+
+\subsection{Week 14}\label{week-14-1}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
